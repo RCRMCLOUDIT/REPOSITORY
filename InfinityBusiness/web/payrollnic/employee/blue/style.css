@@ -1,0 +1,87 @@
+/* tables */
+table.tablesorter {
+	//font-family:arial;
+	//background-color: #CDCDCD;
+	//margin:10px 0pt 15px;
+	//font-size: 8pt;
+	//width: 100%;
+	//text-align: left;
+  	color : black;
+  	margin-top : 1px;
+  	margin-left : 1px;
+  	margin-right : 1px;
+  	margin-bottom : 1px;border-top-width : 1px;border-right-width : 1px;border-bottom-width : 1px;border-left-width : 1px;border-top-style : ridge;border-right-style : ridge;border-bottom-style : ridge;border-left-style : ridge;border-top-color : #8081c0;border-right-color : #8081c0;border-bottom-color : #8081c0;border-left-color : #8081c0;
+  	padding-top : 1px;
+  	padding-left : 1px;
+  	padding-right : 1px;
+  	padding-bottom : 1px;
+  	font-size : 11px;
+  	font-family : Arial;	
+}
+table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+	//background-color: #e6EEEE;
+	//border: 1px solid #FFF;
+	//font-size: 8pt;
+	//padding: 4px;
+  	font-size : 12px;
+  	font-family : Arial;
+  	font-weight : bold;
+  	font-style : normal;
+  	font-variant : normal;
+  	color : #ffffff;
+  	text-decoration : none;
+  	background-color : #8080C0;
+  	text-align : center;	
+	border-top-width : 1px;
+	border-right-width : 1px;
+	border-bottom-width : 1px;
+	border-left-width : 1px;
+	border-top-style : ridge;
+	border-right-style : ridge;
+	border-bottom-style : ridge;
+	border-left-style : ridge;
+}
+
+table.tablesorter thead tr .header {
+	background-image: url(bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+table.tablesorter tbody tr.even td {
+	//color: #3D3D3D;
+	//padding: 4px;
+	//background-color: #FFF;
+	//vertical-align: top;
+	font-size : 11px;
+  	font-family : Arial;
+	font-weight : normal;
+	font-style : normal;
+	font-variant : normal;
+  	text-decoration : none;
+}
+table.tablesorter tbody tr.odd td {
+	//background-color:#F0F0F6;
+	font-size : 11px;
+	font-family : Arial;
+	font-weight : normal;
+	font-style : normal;
+	font-variant : normal;
+	text-decoration : none;
+	background-color : #efefec;
+}
+//CHANGE HEADER IMAGE
+table.tablesorter thead tr .headerSortUp 
+{
+	background-image: url(asc.gif);
+}
+table.tablesorter thead tr .headerSortDown 
+{
+	background-image: url(desc.gif);
+}
+
+//CHANGE HEADER COLOR BACKGROUND WHEN SELECTED
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp 
+{
+	background-color: #8dbdd8;
+}

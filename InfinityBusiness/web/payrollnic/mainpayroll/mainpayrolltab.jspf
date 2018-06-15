@@ -1,0 +1,108 @@
+<%@ page import="javax.sql.RowSet,com.cap.wdf.action.*,com.cap.util.*,java.util.*, java.net.*, java.math.BigDecimal"%>
+	<%
+	 String _contextPath = request.getContextPath();
+	 String baseURL = _contextPath + "/erp/payrollnic/mainpayroll/";
+	 
+	 //String[] tabNames = {"Empleados Activos (F2)","Empleados Inactivos (F4)", "Todos los Empleados (F6)"};
+	 //String[] tabAction = {"employeelistactive.jsp", "employeelistinactive.jsp", "employeelist.jsp"};
+	 String[] tabNames  = new String[numOfRows2];
+	 String[] tabAction = new String[numOfRows2];
+	 
+	 int selectedIndex = -1;
+	 int tabSize = tabNames.length;	
+	 
+	 //we fill the tabs
+	 for(int k=0; k<numOfRows2; k++)
+	 {
+		tabNames[k]  = ((String)listDBBean.valueAtColumnRowResult(ETEMPTYPDS_COLUMN,k,EMPTYPES_CUR)).toString().trim();	  
+		tabAction[k] = "mainpayrolllist.jsp?tabName=" + ((String)listDBBean.valueAtColumnRowResult(ETEMPTYPDS_COLUMN,k,EMPTYPES_CUR)).toString().trim() + "&emptTypeId=" + ((BigDecimal)listDBBean.valueAtColumnRowResult(ETEMPTYPID_COLUMN,k,EMPTYPES_CUR)).toString();
+	 }
+	 
+	 //find selected tab index
+	 for(int k=0; k<tabSize; k++)
+	 {
+	 	if(_tabName.equals(tabNames[k]))
+	 	{
+	 		selectedIndex = k;
+	 		break;
+	 	}
+	 } 	
+	 
+	%>
+		<TABLE width="100%" border="0" cellspacing="0" cellpadding="0">
+		<TR><TD><IMG alt="" height="10" width="1" src="<%=_contextPath%>/erp/ERP_COMMON/images/c.gif"/></TD></TR>
+		<TR><TD class="tbimage1">
+		  <TABLE cellpadding="0" cellspacing="0" border="0">
+			<TR>
+	<%
+	 /* first line */
+	 for(int j=0; j<tabSize; j++)
+	 {
+	 	if(selectedIndex == j) {
+	%>
+			 <TD><IMG src="<%=_contextPath%>/erp/ERP_COMMON/images/tab_left_t.gif" width="4" height="1" alt=""/></TD>
+			 <TD class="tbdark"><IMG src="<%=_contextPath%>/erp/ERP_COMMON/images/c.gif" width="1" height="1" alt=""/></TD>
+	<%
+	 	}else if(j-1 == selectedIndex) {
+	%> 		
+			 <TD><IMG src="<%=_contextPath%>/erp/ERP_COMMON/images/tab_right_t.gif" width="4" height="1" alt=""/></TD>
+			 <TD></TD>
+			 
+	<%
+	 	}else {
+	%> 		
+			 <TD></TD>
+			 <TD></TD>
+	<%
+		}
+	 }	
+	 
+	 //write last column
+	 if(selectedIndex == tabSize -1){
+	%>
+			 <TD><IMG src="<%=_contextPath%>/erp/ERP_COMMON/images/tab_right_t.gif" width="4" height="1" alt=""/></TD>
+	<%
+	 }else {
+	%> 
+			 <TD></TD>
+	<%} %> 
+			</TR>
+			<TR>
+	<%
+	 /* second line */
+	 for(int h=0; h<tabSize; h++)
+	 {
+	 	if(selectedIndex == h) {
+	%>
+			 <TD><IMG alt="" height="21" width="4" src="<%=_contextPath%>/erp/ERP_COMMON/images/tab_left_b.gif"/></TD>
+			 <TD class="tbwhite" nowrap>&nbsp;&nbsp;<%=tabNames[h]%>&nbsp;&nbsp;</TD>
+	<%
+	 	}else if((h-1 == selectedIndex)) {
+	%> 		
+			 <TD><IMG alt="" height="21" width="4" src="<%=_contextPath%>/erp/ERP_COMMON/images/tab_right_b.gif"/></TD>
+			 <TD class="tbimage2" nowrap onmouseover="changeColorBox(this,1);" onclick="prodrev_link_chg('<%=baseURL + tabAction[h]%>');" onmouseout="changeColorBox(this,0);">&nbsp;&nbsp;<span class="text" onmouseover="changeColorBox(this,1);" onmouseout="changeColorBox(this,0);"><%=tabNames[h]%></span>&nbsp;&nbsp;</TD>
+	<%
+	 	}else {
+	%> 		
+			 <TD></TD>
+			 <TD class="tbimage2" nowrap onmouseover="changeColorBox(this,1);" onclick="prodrev_link_chg('<%=baseURL + tabAction[h]%>');" onmouseout="changeColorBox(this,0);">&nbsp;&nbsp;<span class="text" onmouseover="changeColorBox(this,1);" onmouseout="changeColorBox(this,0);"><%=tabNames[h]%></span>&nbsp;&nbsp;</TD>
+	<%
+		}
+	 }	
+	 
+	 //write last column
+	 if(selectedIndex == tabSize -1){
+	%>
+			 <TD><IMG alt="" height="21" width="4" src="<%=_contextPath%>/erp/ERP_COMMON/images/tab_right_b.gif"/></TD>
+	<%
+	 }else {
+	%> 
+			 <TD></TD>
+	<%} %> 
+			</TR>
+		  </TABLE>
+		</TD></TR>
+		</TABLE>
+	
+
+
