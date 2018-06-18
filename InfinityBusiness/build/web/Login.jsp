@@ -4,6 +4,7 @@
     Author     : Moises Romero
     COMENTARIO DE PRUEBA. PARA VER SI SE ACTUALIZA CORRECTAMENTE EL PROYECTO.. 
     DESDE MI MAQUINA MROMERO.
+
 --%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="controller.ServletLogin" %>
