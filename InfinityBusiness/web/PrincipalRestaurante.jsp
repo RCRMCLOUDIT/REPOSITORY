@@ -12,7 +12,7 @@
     String NombreEmpresa = (String) DaoEmpresa.Nombre;
     int IdUsuario = DaoLogin.IdUsuario;
     if (usuario.equals("")) {
-        request.getRequestDispatcher("Login.jsp").forward(request, response);
+        response.sendRedirect("Login.jsp");
     }
 %>
 <html>
