@@ -23,8 +23,13 @@ public class ServletFactura extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        int idCliente = 0;
+        String NombreCliente = request.getParameter("form-NombreCliente");
         int idMesa = Integer.valueOf(request.getParameter("form-idMesa"));
-        String Observaciones = "-";
+        String ComentariosCliente = request.getParameter("form-ComentCliente");
+        String ComentariosInternos = request.getParameter("form-ComentInterno");
+        String Observaciones = request.getParameter("form-Observaciones");
+        String Fecha = request.getParameter("FechaFactura");
         int IdUsuario = DaoLogin.IdUsuario;
         DaoPedido datos = new DaoPedido();
         DaoEmpresa empresa = new DaoEmpresa();
@@ -58,7 +63,7 @@ public class ServletFactura extends HttpServlet {
         try {
             datos.DeleteDescuentoTEMP(idMesa, "MESA");
             DaoFactura factura = new DaoFactura();
-            factura.GenerarFactura(1, IdUsuario, idPedido, Observaciones, SubTotal, Descuento, IVA, Total);
+            factura.GenerarFactura(idCliente, NombreCliente, IdUsuario, idPedido, Observaciones, ComentariosCliente, ComentariosInternos, SubTotal, Descuento, IVA, Total, Fecha);
             factura.ObtenerIdFactura();
             int IdFactura = factura.IdFactura;
 
@@ -71,11 +76,6 @@ public class ServletFactura extends HttpServlet {
             //MANDAR A LLAMAR EL REPORTDE FACTURA
             response.sendRedirect("factura/ReporteFactura.jsp?idFactura=" + IdFactura + "");
 
-            //request.getRequestDispatcher("Principal.jsp").forward(request, response);
-            //response.sendRedirect("Principal.jsp");
-//<a target="_blank" href="http://www.lineadecodigo.com">Abrir Linea de Codigo en una nueva ventana</a>
-//            Reportes re = new Reportes();
-//            re.reporteFacturaTMU(IdFactura);
         } catch (Exception e) {
 
         }

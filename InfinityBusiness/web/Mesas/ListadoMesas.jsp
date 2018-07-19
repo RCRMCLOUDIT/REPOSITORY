@@ -19,7 +19,6 @@
         <link rel="stylesheet" href="../assets/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="../assets/css/responsive.bootstrap.min.css">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <%-- <link rel="stylesheet" href="assets/css/estilos.css"> --%>
         <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
         <link rel="stylesheet" href="../assets/chosen/chosen.min.css">
         <script src="../assets/js/lib/jquery.js"></script>
@@ -64,7 +63,7 @@
             Los datos han sido actualizados correctamente!.
         </div>
         <section id="lista" class="container">
-            <div class="row" id="ListaTipoCuentas">
+            <div class="row" id="ListaTodasMesas">
                 <div  class="col-sm-8">
                     <div class="panel-default">
                         <div class="dropdown">
@@ -72,30 +71,24 @@
                                 <span class="caret"></span></button>
                             <ul class="dropdown-menu">
                                 <li><a href="ListadoMesas.jsp">Todos</a></li>
-                                <li><a href="ListadoMesasAct.jsp">Activos</a></li>
-                                <li><a href="ListadoMesasInc.jsp">Inactivos</a></li>
+                                <li><a href="ListadoMesasAct.jsp">Solo Activos</a></li>
+                                <li><a href="ListadoMesasInc.jsp">Solo Inactivos</a></li>
                             </ul>
                             <button class="btn btn-primary" data-toggle="modal" data-target="#Agregar">Agregar</button>
                         </div>
                         <div class="panel-body" >
                             <table class="table" id="tblMesas">
                                 <thead style="background-color: #4682B4">
-                                <strong>
                                     <tr>
-                                        <th style="color: #FFFFFF; text-align: center;"> <strong>ID</strong></th>
-                                        <th style="color: #FFFFFF; text-align: center;"><strong>NOMBRE</strong></th>                      
-                                        <th style="color: #FFFFFF; text-align: center;"><strong>ESTADO</strong></th>
+                                        <th style="color: #FFFFFF; text-align: center;">Id</th>
+                                        <th style="color: #FFFFFF; text-align: center;">Nombre</th>
+                                        <th style="color: #FFFFFF; text-align: center;">Estado</th>
                                         <th style="color: #FFFFFF; text-align: center;"></th>
-                                    </tr>                                
-                                </strong>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                    <% // declarando y creando objetos globales 
-                                        //Integer cod = DaoLogin.IdUsuario;
-                                        // construyendo forma dinamica 
-                                        // mandando el sql a la base de datos 
+                                    <%
                                         try {
-
                                             ConexionDB conn = new ConexionDB();
                                             conn.Conectar();
                                             String consulta = "SELECT * FROM `mesa`";
@@ -103,7 +96,6 @@
                                             PreparedStatement pst = null;
                                             pst = conn.conexion.prepareStatement(consulta);
                                             rs = pst.executeQuery();
-
                                             while (rs.next()) {
                                                 if (rs.getString(3).equals("Libre")) {
                                                     out.println("<TR class='bg-success' style='text-align: center;'>");
@@ -113,7 +105,6 @@
                                                     out.println("<TD>"
                                                             + "<a class='btn btn-primary' href='UpdateMesa.jsp?idMesa=" + rs.getInt(1) + "'>Editar</a>"
                                                             + "</TD>");
-
                                                     out.println("</TR>");
                                                 }
 
@@ -125,7 +116,6 @@
                                                     out.println("<TD>"
                                                             + "<a class='btn btn-primary' href='UpdateMesa.jsp?idMesa=" + rs.getInt(1) + "'>Editar</a>"
                                                             + "</TD>");
-
                                                     out.println("</TR>");
                                                 }
 
@@ -137,7 +127,6 @@
                                                     out.println("<TD>"
                                                             + "<a class='btn btn-primary' href='UpdateMesa.jsp?idMesa=" + rs.getInt(1) + "'>Editar</a>"
                                                             + "</TD>");
-
                                                     out.println("</TR>");
                                                 }
 
@@ -146,7 +135,7 @@
                                         catch (SQLException e) {
                                         };
                                         //}; 
-                                    %>
+%>
                                 </tbody>
                             </table>                            
                         </div>                        

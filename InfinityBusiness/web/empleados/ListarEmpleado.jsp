@@ -6,13 +6,12 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="beans.ConexionDB"%>
-<%@page import="controller.ServletEmpleadoAdd"%>
 <%@page import="java.sql.SQLException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
     String consulta;
-    consulta = "SELECT `IdEmpleado`, `NoInss`, CONCAT(Nombre,' ',Apellido) AS Empleado, `Telefono`, `Direccion` FROM `empleado`";
+    consulta = "SELECT `IdEmpleado`, NumEmpleado, CONCAT(Nombre,' ',Apellido) AS Empleado, Cedula, `NoInss` FROM `empleado` ORDER BY `Empleado` ASC";
 %>
 <html>
     <head>
@@ -80,7 +79,7 @@
                             data: {NumEmpleado: NumEmpleado, Nombre: Nombre, Apellido: Apellido, Cedula: Cedula, NoInss: NoInss,
                                 FechaNac: FechaNac, Genero: Genero, Direccion: Direccion,
                                 Telefono: Telefono, Celular: Celular, Correo: Correo, FechaIngreso: FechaIngreso},
-                            url: '../ServletEmpleadoAdd',
+                            url: '../ServletEmpleado',
                             success: function (response) {
                                 //utilzar response
                                 $('#Agregar').modal('hide');
@@ -91,7 +90,6 @@
                 });
             });
         </script>
-
         <title>Empleados</title>
     </head>
     <%@include file="../commons/Menu.jsp" %>
@@ -110,24 +108,23 @@
                                 <span class="input-group-addon">Nombre:</span>
                                 <input id="filtro" name="filtro" type="text" value='' class="form-control" placeholder="Ingresa Nombre a  Buscar..." required="true">
                                 <button class="btn btn-primary" id="Buscar" type="submit">Buscar</button>
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#Agregar">Agregar</button>
+                                <a href="AgregarEmpleado.jsp" class='btn btn-primary'>Agregar Nuevo Empleado</a>
+                                <%-- <button class="btn btn-primary" data-toggle="modal" data-target="#Agregar">Agregar</button> --%>
                             </div>
                         </form>
-
-                        <div class="panel-body" >
+                        <div class="panel-body">
                             <table class="table table-hover" id="tblEmpleados">
                                 <thead style="background-color: #4682B4">
                                     <tr>
-                                        <th style="color: #FFFFFF; text-align: center;">Id</th>
-                                        <th style="color: #FFFFFF; text-align: center;">N° INSS</th>                      
+                                        <th style="color: #FFFFFF; text-align: center;">#Empleado</th>
                                         <th style="color: #FFFFFF; text-align: center;">Empleado</th>
-                                        <th style="color: #FFFFFF; text-align: center;">Telefono</th>
-                                        <th style="color: #FFFFFF; text-align: center;">Direccion</th>
+                                        <th style="color: #FFFFFF; text-align: center;">Cedula</th>
+                                        <th style="color: #FFFFFF; text-align: center;">N° INSS</th>                                        
                                         <th style="color: #FFFFFF; text-align: center;">Acciones</th>
                                     </tr>
                                 </thead>
                                 <%-- AQUI CAMBIAR EL COLOR PARA EL FONDO DE LA TABLA--%>
-                                <tbody style="background-color: #C7C6C6;"> 
+                                <tbody style="background-color: #C7C6C6;">
                                     <% // declarando y creando objetos globales 
                                         //Integer cod = DaoLogin.IdUsuario;
                                         // construyendo forma dinamica 
@@ -143,16 +140,13 @@
                                             while (rs.next()) {
 
                                                 out.println("<TR style='text-align: center;'>");
-                                                out.println("<TD style='color: #000000;'>" + rs.getInt(1) + "</TD>");
                                                 out.println("<TD style='color: #000000;'>" + rs.getString(2) + "</TD>");
                                                 out.println("<TD style='color: #000000;'>" + rs.getString(3) + "</TD>");
                                                 out.println("<TD style='color: #000000;'>" + rs.getString(4) + "</TD>");
                                                 out.println("<TD style='color: #000000;'>" + rs.getString(5) + "</TD>");
-
                                                 out.println("<TD>"
                                                         + "<a href='ModificarEmpleado.jsp?idEmp=" + rs.getInt(1) + "' class='btn btn-primary'>Editar ó Ver</a>"
                                                         + "</TD>");
-
                                                 out.println("</TR>");
                                             }; // fin while 
                                         } //fin try no usar ; al final de dos o mas catchs 
@@ -167,8 +161,8 @@
                 </div>
             </div>
         </section>
-        <%--VENTANA MODAL PARA AGREGAR UN NUEVO EMPLEADO --%>
-    <center>
+        
+    <center> <%--VENTANA MODAL PARA AGREGAR UN NUEVO EMPLEADO --%>
         <div class="modal fade" id="Agregar" tabindex="-1" role="dialog" aria-labelbody="mymodallabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -240,7 +234,8 @@
                 </div>
             </div>
         </div>
-    </center> 
+    </center> <%--FIN VENTANA MODAL PARA AGREGAR UN NUEVO EMPLEADO --%>
+    
     <script type="text/javascript">
         $('#FechaNac').datepicker({
             //dateFormat: "dd/mm/yy",

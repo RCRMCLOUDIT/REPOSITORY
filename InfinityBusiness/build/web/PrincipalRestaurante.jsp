@@ -17,7 +17,7 @@
 %>
 <html>
     <head>
-        <META HTTP-EQUIV="REFRESH" CONTENT="600;URL=Principal.jsp">
+        <META HTTP-EQUIV="REFRESH" CONTENT="600;URL=PrincipalRestaurante.jsp">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <link rel="stylesheet" href="../assets/css/bootstrap.css"> 
@@ -44,27 +44,45 @@
     <%-- HEADER --%> 
     <center>
         <div class="table-responsive bg-warning" style="align-content: center; align-items: center; overflow: auto;"> 
-            <table class="table grid">
-                <tbody>
-                    <tr><td colspan="2" style="">
-                <center>
-                    <img src="images/HOSTEL.jpg" alt="" style="alignment-adjust: auto;"/>
-                </center>
-                </td>
-                <td colspan="1" style="">
-                <center>
-                    <%if (NombreEmpresa == null) {%><h3>Coloca El Nombre de Tu Empresa</h3>
-                    <%} else {%><h3><%=NombreEmpresa%></h3><%}%>   
-                </center>
-                </td>
-                <td colspan="2">
-                <center>
-                    <img src="images/LOGOIB.png" alt="" style="alignment-adjust: auto;"/>                    
-                </center>
-                </td> 
-                </tr>                    
-                </tbody>
-            </table>
+            <TABLE border="0" width="600" cellpadding="0" cellspacing="1">
+                <TR>
+                    <TD  width="20%" rowspan="3"><img src="images/HOSTEL.jpg" alt="" style="alignment-adjust: auto;"/></TD>
+                    <TD width="60%" align="center"><h1>Infinity Business</h1></TD>
+                    <TD width="20%" rowspan="3"><img src="images/LOGOIB.png" alt="" style="alignment-adjust: auto;"/></TD>
+                </TR>
+                <TR>
+                    <TD align="center" width="60%">
+                        <%
+                            if (NombreEmpresa == null) {
+                        %>
+                        <h3>Coloca El Nombre de Tu Empresa</h3>
+                        <%
+                        } else {
+                        %>
+                        <h3><%=NombreEmpresa%></h3>
+                        <%}%>
+                    </TD>
+                    <TD width="20%" class="label" align="right"></TD>
+                    <TD width="20%" class="label" align="right"></TD>
+                </TR>
+                <TR></TR>
+                <TR>
+                <nav class="navbar navbar-dark bg-warning">
+                    <div class="collapse navbar-toggleable-md" id="navbarResponsive">
+                        <ul class="nav navbar-nav">
+                            <!-- ===================================== CIERRE SESION ============================================ -->
+                            <li class="nav-item dropdown  nav-item active">
+                                <a class="nav-link dropdown-toggle" href="#" id="responsiveNavbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-windows" aria-hidden="true"></i> Bienvenido! <%=usuario%></a>
+                                <div class="dropdown-menu" aria-labelledby="responsiveNavbarDropdown">
+                                    <a class="dropdown-item" href="Login.jsp"><i class="btn btn-danger btn-sm fa fa-window-close-o"> </i> Cerrar Sesión</a>
+                                    <a class="dropdown-item" href="empleados/EditarPassword.jsp?idUser=<%=IdUsuario%>"><i class="btn btn-primary btn-sm fa fa-address-book"></i> Cambiar Contraseña</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                </TR>
+            </TABLE>
         </div>        
     </center>
     <%-- END OF HEADER --%> 
@@ -75,7 +93,7 @@
             <!-- MEJORA PARA MAS ADELANTE HABILITAR EL MODULO DE RESERVA -->
             <!-- <a class="navbar-brand" href="index"><i class="fa fa-table" aria-hidden="true"></i> Reservas</a>-->
             <ul class="nav navbar-nav">
-                <a class="navbar-brand" href="PrincipalRestaurante.jsp"><img src="images/Home.ico"></a>
+                <a class="navbar-brand" href="Principal.jsp"><img src="images/Home.ico"></a>
                 <!-- =====================================MODULO ADMIN============================================ -->
                 <li class="nav-item dropdown nav-item active">
                     <a class="nav-link dropdown-toggle" href="#" id="responsiveNavbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img src="images/Configuracion.ico" title="Modulo Administracion"></a>
@@ -133,6 +151,16 @@
                         <a id="sub" class="dropdown-item" href="bodegas/ListarMovimientosInventarios.jsp"><i class="btn btn-primary btn-sm"><img src="images/Reporte.ico"></i> Reportes</a>
                     </div>
                 </li>
+
+                <!-- =====================================MODULO COMPRAS============================================ -->
+                <li class="nav-item dropdown nav-item active">
+                    <a class="nav-link dropdown-toggle" href="#" id="responsiveNavbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img src="images/ModuloCompras64x64.png" title="Modulo Compras"></a>
+                    <div class="dropdown-menu" id="sub" aria-labelledby="responsiveNavbarDropdown">
+                        <a id="sub" class="dropdown-item" href="proveedor/BuscaProveedor.jsp"><i class="btn btn-primary btn-sm"><img src="images/Proveedores32x32.png"></i>Proveedores</a>
+                        <a id="sub" class="dropdown-item" href="compras/BuscaCompra.jsp"><i class="btn btn-primary btn-sm"><img src="images/BuscarCompra32x32.png"></i>Buscar Compra</a>
+                    </div>
+                </li>
+
                 <!-- =====================================MODULO ORDENES============================================ -->
                 <li class="nav-item dropdown nav-item active">
                     <a class="nav-link dropdown-toggle" href="#" id="responsiveNavbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img src="images/Ordenes.ico" title="Modulo Ordenes"></a>
@@ -158,14 +186,6 @@
                         <a id="sub" class="dropdown-item" href="contabilidad/CatalogoContable.jsp"><i class="btn btn-primary btn-sm"><img src="images/TiposCuentaCont32.png"></i>Catalogo de Cuentas</a>
                     </div>
                 </li>   
-                <!-- =====================================         ============================================ -->
-                <li class="nav-item dropdown  nav-item active float-xs-right">
-                    <a class="nav-link dropdown-toggle" href="#" id="responsiveNavbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-windows" aria-hidden="true"></i> Bienvenido! <%=usuario%></a>
-                    <div class="dropdown-menu" aria-labelledby="responsiveNavbarDropdown">
-                        <a class="dropdown-item" href="Login.jsp"><i class="btn btn-danger btn-sm fa fa-window-close-o"> </i> Cerrar Sesión</a>
-                        <a class="dropdown-item" href="empleados/EditarPassword.jsp?idUser=<%=IdUsuario%>"><i class="btn btn-primary btn-sm fa fa-address-book"></i> Cambiar Contraseña</a>
-                    </div>
-                </li>
             </ul>
         </div>
     </nav>

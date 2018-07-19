@@ -40,7 +40,7 @@
     <body>
         <div id="EncabezadoPagina" style="background-color: #4682B4;">
             <center>
-                <h1 style="color: #FFFFFF; text-align: center;">Listado de Empleados</h1>                
+                <h1 style="color: #FFFFFF; text-align: center;">Listado de Empleados</h1>              
             </center>
         </div>
         <section id="lista" class="container">

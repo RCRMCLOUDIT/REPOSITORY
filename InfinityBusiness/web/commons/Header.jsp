@@ -3,12 +3,17 @@
     Created on : 07-29-2016, 10:18:49 AM
     Author     : Moises Romero
 --%>
+<%@page import="model.DaoLogin"%>
 <%@page import="model.DaoEmpresa"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
+    String usuario = (String) DaoLogin.User;
     String NombreEmpresa = (String) DaoEmpresa.Nombre;
-    //String RutaLogo = (String) DaoEmpresa.RutaLogo;
+    int IdUsuario = DaoLogin.IdUsuario;
+    if (usuario.equals("")) {
+        response.sendRedirect("../Login.jsp");
+    }
 %>
 <html>
     <head>
@@ -36,27 +41,45 @@
     </head>
     <center>
         <div class="table-responsive bg-warning" style="align-content: center; align-items: center; overflow: auto;"> 
-            <table class="table grid">
-                <tbody>
-                    <tr><td colspan="2" style="">
-                <center>
-                    <img src="../images/HOSTEL.jpg" alt="" style="alignment-adjust: auto;"/>
-                </center>
-                </td>
-                <td colspan="1" style="">
-                <center>
-                    <%if (NombreEmpresa == null) {%><h3>Coloca El Nombre de Tu Empresa</h3>
-                    <%} else {%><h3><%=NombreEmpresa%></h3><%}%>   
-                </center>
-                </td>
-                <td colspan="2">
-                <center>
-                    <img src="../images/LOGOIB.png" alt="" style="alignment-adjust: auto;"/>                    
-                </center>
-                </td> 
-                </tr>                    
-                </tbody>
-            </table>
+            <TABLE border="0" width="600" cellpadding="0" cellspacing="1">
+                <TR>
+                    <TD  width="20%" rowspan="3"><img src="../images/HOSTEL.jpg" alt="" style="alignment-adjust: auto;"/></TD>
+                    <TD width="60%" align="center"><h1>Infinity Business</h1></TD>
+                    <TD width="20%" rowspan="3"><img src="../images/LOGOIB.png" alt="" style="alignment-adjust: auto;"/></TD>
+                </TR>
+                <TR>
+                    <TD align="center" width="60%">
+                        <%
+                            if (NombreEmpresa == null) {
+                        %>
+                        <h3>Coloca El Nombre de Tu Empresa</h3>
+                        <%
+                        } else {
+                        %>
+                        <h3><%=NombreEmpresa%></h3>
+                        <%}%>
+                    </TD>
+                    <TD width="20%" class="label" align="right"></TD>
+                    <TD width="20%" class="label" align="right"></TD>
+                </TR>
+                <TR></TR>
+                <TR>
+                <nav class="navbar navbar-dark bg-warning">
+                    <div class="collapse navbar-toggleable-md" id="navbarResponsive">
+                        <ul class="nav navbar-nav">
+                            <!-- ===================================== CIERRE SESION ============================================ -->
+                            <li class="nav-item dropdown  nav-item active">
+                                <a class="nav-link dropdown-toggle" href="#" id="responsiveNavbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-windows" aria-hidden="true"></i> Bienvenido! <%=usuario%></a>
+                                <div class="dropdown-menu" aria-labelledby="responsiveNavbarDropdown">
+                                    <a class="dropdown-item" href="../Login.jsp"><i class="btn btn-danger btn-sm fa fa-window-close-o"> </i> Cerrar Sesión</a>
+                                    <a class="dropdown-item" href="../empleados/EditarPassword.jsp?idUser=<%=IdUsuario%>"><i class="btn btn-primary btn-sm fa fa-address-book"></i> Cambiar Contraseña</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                </TR>
+            </TABLE>
         </div>        
     </center>
 </html>

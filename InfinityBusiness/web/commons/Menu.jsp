@@ -6,12 +6,6 @@
 <%@page import="model.DaoLogin"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%
-    String usuario = (String) DaoLogin.User;
-    if (usuario.equals("")) {
-        request.getRequestDispatcher("Login.jsp").forward(request, response);
-    }
-%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -21,7 +15,6 @@
         <link rel="stylesheet" href="../assets/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="../assets/css/responsive.bootstrap.min.css">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <%-- <link rel="stylesheet" href="assets/css/estilos.css"> --%>
         <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
         <link rel="stylesheet" href="../assets/chosen/chosen.min.css">
         <script src="../assets/js/lib/jquery.js"></script>
@@ -45,9 +38,7 @@
             <!-- MEJORA PARA MAS ADELANTE HABILITAR EL MODULO DE RESERVA -->
             <!-- <a class="navbar-brand" href="index"><i class="fa fa-table" aria-hidden="true"></i> Reservas</a>-->
             <ul class="nav navbar-nav">
-
-                <a class="navbar-brand" href="../PrincipalRestaurante.jsp"><img src="../images/Home.ico"></a> 
-
+                <a class="navbar-brand" href="../Principal.jsp"><img src="../images/Home.ico"></a> 
                 <!-- =====================================MODULO ADMIN============================================ -->
                 <li class="nav-item dropdown nav-item active">
                     <a class="nav-link dropdown-toggle" href="#" id="responsiveNavbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img src="../images/Configuracion.ico" title="Modulo Administracion"></a>
@@ -57,7 +48,6 @@
                         <a id="sub" class="dropdown-item" href="../empleados/Usuario.jsp"><i class="btn btn-primary btn-sm"><img src="../images/Usuarios.ico"></i>Usuarios</a>
                     </div>
                 </li>
-
                 <!-- =====================================MODULO RESTAURANTE============================================ -->
                 <li class="nav-item dropdown nav-item active">
                     <a class="nav-link dropdown-toggle" href="#" id="responsiveNavbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img src="../images/Restaurante48x48.jpg" title="Modulo Hotel"></a>
@@ -67,7 +57,6 @@
                         <a id="sub" class="dropdown-item" href="../Mesas/ListaReservasMesas.jsp"><i class="btn btn-primary btn-sm"><img src="../images/Reserva32x32.jpg"></i>Ver Reservas</a>                        
                     </div>
                 </li>
-
                 <!-- =====================================MODULO HOTEL============================================ -->
                 <li class="nav-item dropdown nav-item active">
                     <a class="nav-link dropdown-toggle" href="#" id="responsiveNavbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img src="../images/HOTEL.gif" title="Modulo Hotel"></a>
@@ -80,7 +69,6 @@
                         <a id="sub" class="dropdown-item" href="../PrincipalHotel.jsp"><i class="btn btn-primary btn-sm"><img src="../images/CheckOUT.gif"></i>Check OUT</a>
                     </div>
                 </li>
-
                 <!-- =====================================MODULO CATALAGO============================================ -->
                 <li class="nav-item dropdown nav-item active">
                     <a class="nav-link dropdown-toggle" href="#" id="responsiveNavbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img src="../images/Catalogo.ico" title="Modulo Catalogo Productos"></a>
@@ -92,7 +80,6 @@
                         <a id="sub" class="dropdown-item" href="../producto/ListarProducto.jsp"><i class="btn btn-primary btn-sm"><img src="../images/Producto.ico"></i> Producto</a>
                     </div>
                 </li>
-
                 <!-- =====================================MODULO BODEGA============================================ -->
                 <li class="nav-item dropdown nav-item active">
                     <a class="nav-link dropdown-toggle" href="#" id="responsiveNavbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img src="../images/Bodega.ico" title="Modulo Bodega"></a>
@@ -104,7 +91,14 @@
                         <a id="sub" class="dropdown-item" href="../bodegas/ListarMovimientosInventarios.jsp"><i class="btn btn-primary btn-sm"><img src="../images/Reporte.ico"></i> Reportes</a>
                     </div>
                 </li>
-
+                <!-- =====================================MODULO COMPRAS============================================ -->
+                <li class="nav-item dropdown nav-item active">
+                    <a class="nav-link dropdown-toggle" href="#" id="responsiveNavbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img src="../images/ModuloCompras64x64.png" title="Modulo Compras"></a>
+                    <div class="dropdown-menu" id="sub" aria-labelledby="responsiveNavbarDropdown">
+                        <a id="sub" class="dropdown-item" href="../proveedor/BuscaProveedor.jsp"><i class="btn btn-primary btn-sm"><img src="../images/Proveedores32x32.png"></i>Proveedores</a>
+                        <a id="sub" class="dropdown-item" href="../compras/BuscaCompra.jsp"><i class="btn btn-primary btn-sm"><img src="../images/BuscarCompra32x32.png"></i>Buscar Compra</a>
+                    </div>
+                </li>
                 <!-- =====================================MODULO ORDENES============================================ -->
                 <li class="nav-item dropdown nav-item active">
                     <a class="nav-link dropdown-toggle" href="#" id="responsiveNavbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img src="../images/Ordenes.ico" title="Modulo Ordenes"></a>
@@ -112,7 +106,6 @@
                         <a id="sub" class="dropdown-item" href="../ordenes/ListarOrdenes.jsp"><i class="btn btn-primary btn-sm"><img src="../images/ListaOrdenes.ico"></i> Lista Ordenes</a>
                     </div>
                 </li>                
-
                 <!-- =====================================MODULO FACTURACION============================================ -->
                 <li class="nav-item dropdown nav-item active">
                     <a class="nav-link dropdown-toggle" href="#" id="responsiveNavbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img src="../images/Facturacion.ico" title="Modulo Facturacion"></a>
@@ -123,7 +116,6 @@
                         <a id="sub" class="dropdown-item" href="#"><i class="btn btn-primary btn-sm"><img src="../images/Reporte.ico"></i> Reportes</a>
                     </div>
                 </li>         
-
                 <!-- =====================================MODULO CONTABILIDAD============================================ -->
                 <li class="nav-item dropdown nav-item active">
                     <a class="nav-link dropdown-toggle" href="#" id="responsiveNavbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img src="../images/Contabilidad64.png" title="Modulo Contabilidad"></a>
@@ -132,15 +124,6 @@
                         <a id="sub" class="dropdown-item" href="../contabilidad/CatalogoContable.jsp"><i class="btn btn-primary btn-sm"><img src="../images/TiposCuentaCont32.png"></i>Catalogo de Cuentas</a>
                     </div>
                 </li>                    
-
-                <!-- =====================================         ============================================ -->
-                <li class="nav-item dropdown  nav-item active float-xs-right">
-                    <a class="nav-link dropdown-toggle" href="#" id="responsiveNavbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-windows" aria-hidden="true"></i> Bienvenido! <%=usuario%></a>
-                    <div class="dropdown-menu" aria-labelledby="responsiveNavbarDropdown">
-                        <a class="dropdown-item" href="../Login.jsp"><i class="btn btn-danger btn-sm fa fa-window-close-o"> </i> Cerrar Sesión</a>
-                        <a class="dropdown-item" href="../empleados/EditarPassword.jsp?idUser=<%=DaoLogin.IdUsuario%>"><i class="btn btn-primary btn-sm fa fa-address-book"></i> Cambiar Contraseña</a>
-                    </div>
-                </li>
             </ul>
         </div>
     </nav>

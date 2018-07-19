@@ -23,7 +23,6 @@
             Direccion = datos.Direccion.trim();
             /*Parametros para realizar la conexion*/
             ConexionDB conn = new ConexionDB();
-            conn.Conectar();
             //conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/cloud.pos", "MROMERO", "MROMERO0017G");
             //conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloud.pos", "rcromero", "Rcromero1082+");
             /*Establecemos la ruta del reporte*/

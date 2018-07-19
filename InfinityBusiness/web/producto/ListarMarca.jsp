@@ -9,7 +9,6 @@
 <%@page import="model.DaoLogin"%>
 <%@page import="model.DaoMarca"%>
 <%@page import="controller.ServletMarca"%>
-<%@page import="controller.ServletMarcaAdd"%>
 <%@page import="java.sql.SQLException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -39,11 +38,12 @@
             $(document).ready(function () {
                 $('#btnAgregar').click(function () {
                     var Nombre = $('#form-Nombre').val();
-                    var Descripcion = $('#form-Descrip').val();
+                    var Descripcion = $('#form-Descripcion').val();
+                    var Accion = 'Add';
                     $.ajax({
                         type: 'POST',
-                        data: {Nombre: Nombre, Descripcion: Descripcion},
-                        url: '../ServletMarcaAdd',
+                        data: {Nombre: Nombre, Descripcion: Descripcion, Accion:Accion},
+                        url: '../ServletMarca',
                         success: function (response) {
                             //utilzar response
                             $('#Agregar').modal('hide');
@@ -59,7 +59,7 @@
     <body>
         <div id="EncabezadoPagina" style="background-color: #4682B4;">
             <center>
-                <h1 style="color: #FFFFFF; text-align: center;">Listado de Marcas</h1>                
+                <h1 style="color: #FFFFFF; text-align: center;">Listado de Marcas</h1>               
             </center>
         </div>
         <section id="lista" class="container">
@@ -72,12 +72,13 @@
                                     <span class="input-group-addon">Marca:</span>
                                     <input id="filtro" name="filtro" type="text" value='' class="form-control col-sm-6" placeholder="Ingresa Nombre a  Buscar..." required="true">
                                     <button class="btn btn-primary" id="Buscar" type="submit">Buscar</button>
-                                    <a href="#" class="btn btn-primary">Agregar</a>
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#Agregar">Agregar</button>
+                                    <%-- <a href="#" class="btn btn-primary">Agregar</a> --%>
                                 </div>
                             </form>
                         </div>
                         <div class="panel-body" >
-                            <table class="table table-hover" id="tblCategorias">
+                            <table class="table table-hover" id="tblMarca">
                                 <thead style="background-color: #4682B4">
                                     <tr>
                                         <th style="color: #FFFFFF; text-align: center;">Id</th>
@@ -101,13 +102,13 @@
                                             pst = conn.conexion.prepareStatement(consulta);
                                             rs = pst.executeQuery();
                                             while (rs.next()) {
-                                                out.println("<TR>");
+                                                out.println("<TR style='text-align: center;'>");
                                                 out.println("<TD style='color: #000000;'>" + rs.getInt(1) + "</TD>");
                                                 out.println("<TD style='color: #000000;'>" + rs.getString(2) + "</TD>");
                                                 out.println("<TD style='color: #000000;'>" + rs.getString(3) + "</TD>");
                                                 out.println("<TD style='color: #000000;'>" + rs.getString(4) + "</TD>");
                                                 out.println("<TD>"
-                                                        + "<a href='?=" + rs.getInt(1) + " ' class='btn btn-primary'>Editar</a>"
+                                                        + "<a href='EditarMarca.jsp?idMarca=" + rs.getInt(1) + "&Nombre=" + rs.getString(2) + "&Descripcion=" + rs.getString(3) + "' class='btn btn-primary'>Editar</a>"
                                                         + "</TD>");
                                                 out.println("</TR>");
                                             }; // fin while 
@@ -133,52 +134,20 @@
                         <h4>Agregar una Marca</h4>
                     </div>
                     <div class="modal-body">
-                        <form id="FormMarca" role="form" action="ServletMarcaAdd" method="POST" class="form-control">
+                        <form id="FormMarca" role="form" action="ServletMarca" method="POST" class="form-control">
                             <div class="form-control">
                                 <label for="Nombre">Nombre Marca</label>
                                 <input type="text" class="form-control" id="form-Nombre" name="form-Nombre" placeholder="Nombre...">   
                             </div>
                             <div class="form-control">
                                 <label for="Descripcion">Descripcion</label>
-                                <input type="text" class="form-control" id="form-Descrip" name="form-Descrip" placeholder="Descripcion...">   
+                                <input type="text" class="form-control" id="form-Descripcion" name="form-Descripcion" placeholder="Descripcion...">   
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                         <button type="button" class="btn btn-primary" id="btnAgregar" >Agregar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </center> 
-
-    <%-- VENTANA MODAL PARA EDITAR UNA MARCA --%>
-    <center>
-        <%-- <button class="btn btn-info" data-toggle="modal" data-target="#Editar">Editar</button> --%>
-        <div class="modal fade" id="Editar" tabindex="-1" role="dialog" aria-labelbody="mymodallabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4>Editando Marca</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form id="FormMarca" role="form" action="ServletMarca" method="POST" class="form-control">
-                            <div class="form-control">
-                                <label for="Nombre">Nombre Marca</label>
-                                <input type="text" class="form-control" id="IdEdit" placeholder="Id...">
-                                <input type="text" class="form-control" id="NombreEdit" placeholder="Nombre...">
-                            </div>
-                            <div class="form-control">
-                                <label for="Descripcion">Descripcion</label>
-                                <input type="text" class="form-control" id="DescripcionEdit" placeholder="Descripcion...">   
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary" id="btnActualizar" >Actualizar</button>
                     </div>
                 </div>
             </div>

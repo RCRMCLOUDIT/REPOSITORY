@@ -23,7 +23,7 @@ public class ServletLogin extends HttpServlet {
         DaoEmpresa config = new DaoEmpresa();
         if (datos.validar(Nombre, Clave)) {
             config.BuscarEmpresa();
-            request.getRequestDispatcher("PrincipalRestaurante.jsp").forward(request, response);
+            request.getRequestDispatcher("Principal.jsp").forward(request, response);
 //            String Tipo = config.TipoNegocio;
 //            if (Tipo.equals("")) {
 //                request.getRequestDispatcher("Principal.jsp").forward(request, response);

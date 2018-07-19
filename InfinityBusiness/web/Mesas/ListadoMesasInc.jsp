@@ -18,7 +18,6 @@
         <link rel="stylesheet" href="../assets/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="../assets/css/responsive.bootstrap.min.css">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <%-- <link rel="stylesheet" href="assets/css/estilos.css"> --%>
         <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
         <link rel="stylesheet" href="../assets/chosen/chosen.min.css">
         <script src="../assets/js/lib/jquery.js"></script>
@@ -36,15 +35,15 @@
     </head>
     <%@include file="../commons/Menu.jsp" %>
     <body>
+        <div id="EncabezadoPagina" style="background-color: #4682B4;">
+            <center>
+                <h1 style="color: #FFFFFF; text-align: center;">Lista de Mesas Inactivas</h1>                
+            </center>
+        </div>
         <section id="lista" class="container">
-            <div class="row" id="ListaTipoCuentas">
+            <div class="row" id="ListaMesasInactivas">
                 <div  class="col-sm-8">
                     <div class="panel-default">
-                        <div class="panel-title">
-                            <Center>
-                                <h3 class="panel-title">Listado de Mesas Inactivas</h3>
-                            </center>
-                        </div>
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Mostrar...
                                 <span class="caret"></span></button>
@@ -57,21 +56,17 @@
                         </div>
                         <div class="panel-body" >
                             <table class="table" id="tblMesas">
-                                <thead>
-                                    <tr class="bg-info">
-                                        <th style="text-align: center;">Id</th>
-                                        <th style="text-align: center;">Nombre</th>                      
-                                        <th style="text-align: center;">Estado</th>
-                                        <th style="text-align: center;">Acciones</th>
-                                    </tr>                                 
+                                <thead style="background-color: #4682B4">
+                                    <tr>
+                                        <th style="color: #FFFFFF; text-align: center;">Id</th>
+                                        <th style="color: #FFFFFF; text-align: center;">Nombre</th>
+                                        <th style="color: #FFFFFF; text-align: center;">Estado</th>
+                                        <th style="color: #FFFFFF; text-align: center;"></th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                    <% // declarando y creando objetos globales 
-                                        //Integer cod = DaoLogin.IdUsuario;
-                                        // construyendo forma dinamica 
-                                        // mandando el sql a la base de datos 
+                                    <%
                                         try {
-
                                             ConexionDB conn = new ConexionDB();
                                             conn.Conectar();
                                             String consulta = "SELECT * FROM `mesa` WHERE Activo='No'";
@@ -82,110 +77,35 @@
 
                                             while (rs.next()) {
                                                 if (rs.getString(3).equals("Libre")) {
-                                                    out.println("<TR class='bg-success''>");
-
-                                                    out.println("<TD style='display:none;'>"
-                                                            + "<div class='myform-bottom'>"
-                                                            + "<form id='FormMarca' role='form' action='../ServletMesas'"
-                                                            + "method='POST' class='form-control'>"
-                                                            + "</div>"
-                                                            + "</TD>");
-
-                                                    out.println("<TD>"
-                                                            + "<div>"
-                                                            + "<input type='text' class='form-control' style='width: 60px' id='idMesa' name='form-idMesa' readonly value='" + rs.getInt(1) + "'>"
-                                                            + "</div>"
-                                                            + "</TD>");
-
-                                                    out.println("<TD>"
-                                                            + "<div>"
-                                                            + "<input type='text' class='form-control' style='width: auto' id='Nombre' name='form-Nombre' readonly value='" + rs.getString(2) + "'>"
-                                                            + "</div>"
-                                                            + "</TD>");
-
-                                                    out.println("<TD>"
-                                                            + "<div>"
-                                                            + "<input type='text' class='form-control' style='width: auto' id='Estado' name='form-Estado' readonly value='" + rs.getString(3) + "'>"
-                                                            + "</div>"
-                                                            + "</form>"
-                                                            + "</TD>");
-
+                                                    out.println("<TR class='bg-success' style='text-align: center;'>");
+                                                    out.println("<TD style='color: #FFFFFF;'>" + rs.getInt(1) + "</TD>");
+                                                    out.println("<TD style='color: #FFFFFF;'>" + rs.getString(2) + "</TD>");
+                                                    out.println("<TD style='color: #FFFFFF;'>" + rs.getString(3) + "</TD>");
                                                     out.println("<TD>"
                                                             + "<a class='btn btn-primary' href='UpdateMesa.jsp?idMesa=" + rs.getInt(1) + "'>Editar</a>"
                                                             + "</TD>");
-
                                                     out.println("</TR>");
                                                 }
 
                                                 if (rs.getString(3).equals("Ocupado")) {
-                                                    out.println("<TR class='bg-danger''>");
-
-                                                    out.println("<TD style='display:none;'>"
-                                                            + "<div class='myform-bottom'>"
-                                                            + "<form id='FormMarca' role='form' action='../ServletMesas'"
-                                                            + "method='POST' class='form-control'>"
-                                                            + "</div>"
-                                                            + "</TD>");
-
-                                                    out.println("<TD>"
-                                                            + "<div>"
-                                                            + "<input type='text' class='form-control' style='width: 60px' id='idMesa' name='form-idMesa' readonly value='" + rs.getInt(1) + "'>"
-                                                            + "</div>"
-                                                            + "</TD>");
-
-                                                    out.println("<TD>"
-                                                            + "<div>"
-                                                            + "<input type='text' class='form-control' style='width: auto' id='Nombre' name='form-Nombre' readonly value='" + rs.getString(2) + "'>"
-                                                            + "</div>"
-                                                            + "</TD>");
-
-                                                    out.println("<TD>"
-                                                            + "<div>"
-                                                            + "<input type='text' class='form-control' style='width: auto' id='Estado' name='form-Estado' readonly value='" + rs.getString(3) + "'>"
-                                                            + "</div>"
-                                                            + "</form>"
-                                                            + "</TD>");
-
+                                                    out.println("<TR class='bg-danger' style='text-align: center;'>");
+                                                    out.println("<TD style='color: #FFFFFF;'>" + rs.getInt(1) + "</TD>");
+                                                    out.println("<TD style='color: #FFFFFF;'>" + rs.getString(2) + "</TD>");
+                                                    out.println("<TD style='color: #FFFFFF;'>" + rs.getString(3) + "</TD>");
                                                     out.println("<TD>"
                                                             + "<a class='btn btn-primary' href='UpdateMesa.jsp?idMesa=" + rs.getInt(1) + "'>Editar</a>"
                                                             + "</TD>");
-
                                                     out.println("</TR>");
                                                 }
 
                                                 if (rs.getString(3).equals("Reservado")) {
-                                                    out.println("<TR class='bg-warning''>");
-
-                                                    out.println("<TD style='display:none;'>"
-                                                            + "<div class='myform-bottom'>"
-                                                            + "<form id='FormMarca' role='form' action='../ServletMesas'"
-                                                            + "method='POST' class='form-control'>"
-                                                            + "</div>"
-                                                            + "</TD>");
-
-                                                    out.println("<TD>"
-                                                            + "<div>"
-                                                            + "<input type='text' class='form-control' style='width: 60px' id='idMesa' name='form-idMesa' readonly value='" + rs.getInt(1) + "'>"
-                                                            + "</div>"
-                                                            + "</TD>");
-
-                                                    out.println("<TD>"
-                                                            + "<div>"
-                                                            + "<input type='text' class='form-control' style='width: auto' id='Nombre' name='form-Nombre' readonly value='" + rs.getString(2) + "'>"
-                                                            + "</div>"
-                                                            + "</TD>");
-
-                                                    out.println("<TD>"
-                                                            + "<div>"
-                                                            + "<input type='text' class='form-control' style='width: auto' id='Estado' name='form-Estado' readonly value='" + rs.getString(3) + "'>"
-                                                            + "</div>"
-                                                            + "</form>"
-                                                            + "</TD>");
-
+                                                    out.println("<TR class='bg-warning' style='text-align: center;'>");
+                                                    out.println("<TD style='color: #FFFFFF;'>" + rs.getInt(1) + "</TD>");
+                                                    out.println("<TD style='color: #FFFFFF;'>" + rs.getString(2) + "</TD>");
+                                                    out.println("<TD style='color: #FFFFFF;'>" + rs.getString(3) + "</TD>");
                                                     out.println("<TD>"
                                                             + "<a class='btn btn-primary' href='UpdateMesa.jsp?idMesa=" + rs.getInt(1) + "'>Editar</a>"
                                                             + "</TD>");
-
                                                     out.println("</TR>");
                                                 }
 
@@ -194,7 +114,7 @@
                                         catch (SQLException e) {
                                         };
                                         //}; 
-                                    %>
+%>
                                 </tbody>
                             </table>                            
                         </div>                        

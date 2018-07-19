@@ -60,10 +60,9 @@
                             <thead style="background-color: #4682B4">
                                 <tr>
                                     <th style="color: #FFFFFF; text-align: center;">Id</th>
-                                    <th style="color: #FFFFFF; text-align: center;">Nombre</th>                      
+                                    <th style="color: #FFFFFF; text-align: center;">Nombre</th>
+                                    <th style="color: #FFFFFF; text-align: center;">Apellido</th>
                                     <th style="color: #FFFFFF; text-align: center;">Cedula</th>
-                                    <th style="color: #FFFFFF; text-align: center;">Telefono</th>
-                                    <th style="color: #FFFFFF; text-align: center;">Direccion</th>
                                     <th style="color: #FFFFFF; text-align: center;">Acciones</th>
                                 </tr>
                             </thead>
@@ -78,7 +77,7 @@
                                         conn.Conectar();
                                         ResultSet rs = null;
                                         PreparedStatement pst = null;
-                                        pst = conn.conexion.prepareStatement("SELECT IdCliente, CONCAT(Nombre,' ',Apellido) AS Cliente, DNI, Telefono, Direccion FROM `cliente`");
+                                        pst = conn.conexion.prepareStatement("SELECT IdCliente, Nombre, Apellido, DNI FROM `cliente`");
                                         rs = pst.executeQuery();
 
                                         while (rs.next()) {

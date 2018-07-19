@@ -24,21 +24,25 @@ public class DaoFactura extends ConexionDB {
         super();
     }
 
-    public void GenerarFactura(int IdCliente, int IdUsuario, int IdPedido, String Observaciones, double SubTotal, double Descuento, double IVA, double Total) throws SQLException {
+    public void GenerarFactura(int IdCliente, String NombreCliente, int IdUsuario, int IdPedido, String Observaciones, String ComentariosCliente, String ComentariosInternos, double SubTotal, double Descuento, double IVA, double Total, String FechaFactura) throws SQLException {
         existe = false;
         try {
             ConexionDB conn = new ConexionDB();
             conn.Conectar();
             st = conn.conexion.createStatement();
-            pst = conn.Conectar().prepareStatement("INSERT INTO `factura` (IdCliente, IdUsuario, IdPedido, Observaciones, Subtotal, Descuento, Iva, Total ) VALUES(?,?,?,?,?,?,?,?)");
+            pst = conn.Conectar().prepareStatement("INSERT INTO `facturacion` (IdCliente, NombreCliente, IdUsuario, IdPedido, Observaciones, ComentariosCliente, ComentariosInternos, Subtotal, Descuento, Iva, Total, FechaFactura) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
             pst.setInt(1, IdCliente);
-            pst.setInt(2, IdUsuario);
-            pst.setInt(3, IdPedido);
-            pst.setString(4, Observaciones);
-            pst.setDouble(5, SubTotal);
-            pst.setDouble(6, Descuento);
-            pst.setDouble(7, IVA);
-            pst.setDouble(8, Total);
+            pst.setString(2, NombreCliente);
+            pst.setInt(3, IdUsuario);
+            pst.setInt(4, IdPedido);
+            pst.setString(5, Observaciones);
+            pst.setString(6, ComentariosCliente);
+            pst.setString(7, ComentariosInternos);
+            pst.setDouble(8, SubTotal);
+            pst.setDouble(9, Descuento);
+            pst.setDouble(10, IVA);
+            pst.setDouble(11, Total);
+            pst.setString(12, FechaFactura);
             pst.executeUpdate();
             conn.Cerrar();
             existe = true;
@@ -53,7 +57,7 @@ public class DaoFactura extends ConexionDB {
             IdFactura = 0;
             conn = this.Conectar();
             st = conn.createStatement();
-            rs = st.executeQuery("Select Count(IdFactura) AS IdFactura FROM `factura`");
+            rs = st.executeQuery("Select Count(IdFactura) AS IdFactura FROM `Facturacion`");
             if (rs.next()) {
                 existe = true;
                 IdFactura = rs.getInt("IdFactura");

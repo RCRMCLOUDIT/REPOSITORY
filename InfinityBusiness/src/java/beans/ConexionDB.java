@@ -16,10 +16,16 @@ public class ConexionDB {
 //    public String pass = "Rcromero1082+";
 //    public String sUrl = "jdbc:mysql://localhost:3306/cloud.pos";
 
-//PARAMETROS PARA LA CONEXION AL SERVIDOR LOCAL
-    public String userSQL = "root";
-    public String pass = "root";
+//PARAMETROS PARA LA CONEXION AL SERVIDOR LOCAL MOISES    
+    public String userSQL = "MROMERO";
+    public String pass = "MROMERO0017G";
     public String sUrl = "jdbc:mysql://localhost:3306/cloud.pos";
+
+//PARAMETROS PARA LA CONEXION AL SERVIDOR LOCAL
+//    public String userSQL = "root";
+//    public String pass = "root";
+//    public String sUrl = "jdbc:mysql://localhost:3306/cloud.pos";
+     
     public Connection conexion = null;
 
     public ConexionDB() {

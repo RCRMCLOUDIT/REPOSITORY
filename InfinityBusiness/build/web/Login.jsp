@@ -2,9 +2,6 @@
     Document   : Login
     Created on : 07-10-2017, 11:51:26 AM
     Author     : Moises Romero
-    COMENTARIO DE PRUEBA. PARA VER SI SE ACTUALIZA CORRECTAMENTE EL PROYECTO.. 
-    DESDE MI MAQUINA MROMERO.
-
 --%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="controller.ServletLogin" %>
@@ -19,6 +16,7 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500" rel="stylesheet">
         <link rel="stylesheet" href="css/login.css">        
         <title>Inicio Sesion</title>
+
     </head>
     <body>
     <Center>

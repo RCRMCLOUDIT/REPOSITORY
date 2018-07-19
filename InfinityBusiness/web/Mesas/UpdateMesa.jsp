@@ -50,7 +50,7 @@
                         url: '../ServletMesas',
                         success: function (response) {
                             //utilzar response
-                         location.href ="/Cloud/Mesas/ListadoMesas.jsp";
+                         location.href ="/InfinityBusiness/Mesas/ListadoMesas.jsp";
                         }
                     });
                 });

@@ -100,7 +100,7 @@
                                             <button class='btn btn-warning dropbtn'>Reservado</button>
                                         </td>
                                         <td colspan="2">
-                                            <a href='Principal.jsp'>
+                                            <a href="PrincipalRestaurante.jsp">
                                                 <button class='btn btn-primary dropbtn'>
                                                     Actualizar Pagina
                                                 </button>

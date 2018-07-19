@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.DaoMarca;
-
 /**
  *
  * @author Moises Romero
@@ -17,32 +16,29 @@ public class ServletMarca extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        //response.setContentType("text/plain");
-        int Id = Integer.valueOf(request.getParameter("form-id"));
-        String Marca = request.getParameter("form-Nombre");
-        String Descrip = request.getParameter("form-Descrip");
-        try {
-            DaoMarca datos = new DaoMarca();
-            datos.ActualizarMarca(Id, Marca, Descrip);
-            response.sendRedirect("producto/ListarMarca.jsp");
-        } catch (Exception e) {
-            e.getMessage();
+        String Accion = request.getParameter("Accion");
+        DaoMarca datos = new DaoMarca();
+        if (Accion.equals("Add")) {
+            String Marca = request.getParameter("Nombre");
+            String Descripcion = request.getParameter("Descripcion");
+            try {
+                datos.AgregarMarca(Marca, Descripcion);
+            } catch (Exception e) {
+                e.getMessage();
+            }
         }
 
-//        try (PrintWriter out = response.getWriter()) {
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet ServletAgregaPedido</title>");
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Id: " + Id + "</h1>");
-//            out.println("<h1>Nombre: " + Marca + "</h1>");
-//            out.println("<h1>Descripcion: " + Descrip + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        }
+        if (Accion.equals("Update")) {
+            int Id = Integer.valueOf(request.getParameter("form-IdMarca"));
+            String Marca = request.getParameter("form-Nombre");
+            String Descripcion = request.getParameter("form-Descripcion");
+            try {
+                datos.ActualizarMarca(Id, Marca, Descripcion);
+                response.sendRedirect("producto/ListarMarca.jsp");
+            } catch (Exception e) {
+                e.getMessage();
+            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
